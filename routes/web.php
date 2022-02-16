@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\PolitesseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,33 +20,12 @@ Route::get('/', function () {
 });
 
 
-Route::get('/hello', function () {
-    return view('hello', [
-        'name' => 'Fiorella',
-        'numbers' => [1, 3, 7],
-    ]);
-});
+Route::get('/hello', [PolitesseController::class, 'helloAll']);
 
-Route::get('/au-revoir', function() {
-    return view('good-bye');
-});
+Route::get('/au-revoir', [PolitesseController::class, 'goodbye']);
 
-Route::get('/bonjour/{name}', function ($name) {
-    return view ('hello', [
-        'name' => $name,
-        'numbers' => [],
-    ]);
-});
+Route::get('/hello/{name}', [PolitesseController::class, 'helloSomeone']);
 
-Route::get('/a-propos', function () {
-    return view('a-propos', [
-        'teams' => ['José', 'Julien', 'Quentin'],
-    ]);
-});
+Route::get('/a-propos', [AboutController::class, 'aPropos']);
 
-Route::get('/a-propos/{teams}', function ($teams) {
-    return view('a-propos-de', [
-        'teams' => $teams
-    ]);
-});
-
+Route::get('/a-propos/{teams}', [AboutController::class, 'aProposDe']);
